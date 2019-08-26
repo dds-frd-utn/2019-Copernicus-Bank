@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Copernicus Bank</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('images/img-01.jpg');">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form">
+					<div class="login100-form-avatar">
+						<img src="images/logotipo.png" alt="AVATAR">
+						</div>
+
+						<span class="login100-form-title p-t-20 p-b-45">
+							C O P E R N I C U S
+						</span>
+						
+						<div id="boton" class="container-login100-form-btn p-t-10">
+
+							<div class="container-login100-form-btn p-t-10">
+								<button id="lastmov" class="login100-form-btn">
+									ULTIMOS MOVIMIENTOS
+								</button>
+							</div>
+
+							<div class="container-login100-form-btn p-t-10">
+								<button id="transferir" class="login100-form-btn">
+									TRANSFERENCIAS
+								</button>
+							</div>
+
+							<div class="container-login100-form-btn p-t-10">
+								<button id="bonos" class="login100-form-btn">
+									BONOS
+								</button>
+							</div>
+						</div>
+
+						<h1 id="saldos" class="container-login100-form-btn p-t-10" style="display: none"></h1>
+
+						<div style="width: 700px; text-align: left; margin-left: -95px">
+
+							<table class="table table-bordered txt1" style="display: none">
+								<thead>
+									<th>Movimientos</th>
+									<th id="tipo">Estado</th>
+									<th id="estado">Id Cuenta</th>
+									<th>Id Movimiento</th>
+									<th>Importe</th>
+								</thead>
+								<tbody>
+								</tbody>
+							</table>
+						</div>
+
+						<div class="text-center w-full p-t-30">
+							<a href="javascript:window.history.back();">&laquo; Volver atrás</a>
+						</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+	<script src="funciones.js"></script>
+	<script type="text/javascript">
+
+	var id = id_url();
+	$('#bonos').on('click', function(){
+				window.location.href='http://localhost:8080/copernicus/login/bono.html?id='+id;
+					return false;
+				})
+
+	$('#transferir').on('click', function(){
+				window.location.href='http://localhost:8080/copernicus/login/transacciones.html?id='+id;
+					return false;
+				})
+
+//movimientos
+
+$.fn.tipomov = function(myJson, i) {
+	switch (myJson[i].tipo) {
+	case 1:
+		tipo = "Bonos de primer serie";
+	break;
+	case 2:
+		tipo = "Bonos de segunda serie";
+	}
+return tipo;
+}
+
+$.fn.llenarTabla = function(myJson, i,textMovi) {
+	$("tbody").append(
+		$("<tr/>"),
+		$("<td/>", {text: textMovi}),
+		$("<td/>", {text: myJson[i].fechaMovimiento}),
+		$("<td/>", {text: myJson[i].idCuenta}),
+		$("<td/>", {text: myJson[i].idMovimiento}),
+		$("<td/>", {text: myJson[i].importe}),
+	);
+}
+
+//Bono
+$("#lastmov").click(function(event){
+    event.preventDefault();
+    $("#boton").hide()
+    $("#div_salir").hide();
+    $("#div_volver").show();
+    $("#saldos").show();
+	$.ajax({
+		url: "http://localhost:8080/copernicus/rest/movimientos/cuenta/" + id,
+		method: "GET",
+		dataType:"json",
+        success:function(myJson){
+        	console.log(myJson);
+			$("table").show();
+			let textMovi = "";
+			for(var i in myJson) {
+				textMovi = $.fn.tipomov(myJson, i);
+				$.fn.llenarTabla(myJson, i, textMovi);
+			}
+		},
+		error:function(error){
+        	console.log(error);
+        }
+	})
+});
+
+
+
+
+</script>
+</body>
+</html>

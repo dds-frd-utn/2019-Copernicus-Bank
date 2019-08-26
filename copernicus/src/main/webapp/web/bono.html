@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Copernicus Bank</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+</head> 
+<body>
+
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('images/img-01.jpg');">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form">
+					<div class="login100-form-avatar">
+						<img src="images/logotipo.png" alt="AVATAR">
+					</div>
+
+					<span class="login100-form-title p-t-20 p-b-45">
+						C O P E R N I C U S
+					</span>
+
+					<div class="container-login100-form-btn p-t-10">
+						<button id="comprabonos" class="login100-form-btn">
+							COMPRAR    BONOS
+						</button>
+					</div>
+
+					<div class="container-login100-form-btn p-t-10">
+							<button class="login100-form-btn" id="bono" >
+							M I S / B O N O S
+							</button>
+						</div>
+
+					</div>
+					<h1 id="saldos" class="container-login100-form-btn p-t-10" style="display: none"></h1>
+					<table id="keywords" cellspacing="0" cellpadding="0" style="display: none">
+						    <thead>
+						      <tr>
+						        <th><span>Bono</span></th>
+						        <th id="tipo"><span>Monto Invertido</span></th>
+						        <th id="estado"><span>Interes</span></th>
+						        <th><span>Impuesto</span></th>
+						       </tr>
+						    </thead>
+						    <tbody>
+						    </tbody>
+						  </table>
+					<div class="text-center w-full p-t-30">
+						<a href="javascript:window.history.back();">&laquo; Volver atrás</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+	<script src="funciones.js"></script>
+	<script type="text/javascript">
+
+	var id = id_url();
+		// tabla que muestra los datos del bono
+		$.fn.bonoid = function(myJson, i) {
+			switch (myJson[i].idBono) {
+			case 1:
+				idBono = "Bonos de primer serie";
+			break;
+			case 2:
+				idBono = "Bonos de segunda serie";
+			}
+		return idBono;
+		}
+
+		$.fn.llenarTabla = function(myJson, i,textBono) {
+			$("tbody").append(
+				$("<tr/>"),
+				$("<td/>", {text: textBono}),
+				$("<td/>", {text: myJson[i].montoInvertido}),
+				$("<td/>", {text: myJson[i].interes}),
+				$("<td/>", {text: myJson[i].impuesto}),
+			);
+		}
+
+		// Mis bonos
+		$("#bono").click(function(event){
+			request("http://lsi.no-ip.org:8282/esferopolis/api/bono/","GET","",function(response){console.log(response)});
+		    event.preventDefault();
+		    $("#saldos").show();
+			$.ajax({
+				url: "http://localhost:8080/copernicus/rest/movimiento/bonos/id/" + id,
+				method: "GET",
+				dataType:"json",
+		        success:function(myJson){
+		        	console.log(myJson);
+					$("table").show();
+					let textBono = "";
+					for(var i in myJson) {
+						textBono = $.fn.bonoid(myJson, i);
+						$.fn.llenarTabla(myJson, i, textBono);
+					}
+				},
+				error:function(error){
+		        	console.log(error);
+		        }
+			})
+		});
+
+//Bonos del Banco central
+		$("#comprabonos").click(function(event){
+				event.preventDefault();
+				$("#saldos").show();
+				var url = "http://lsi.no-ip.org:8282/esferopolis/api/bono/";
+				
+				request (url, "GET","",function(myJson){
+					console.log(myJson);
+					$("table").show();
+					let textBono = "";
+					for(var i in myJson) {
+						textBono = $.fn.bonoid(myJson, i);
+						$.fn.llenarTabla(myJson, i, textBono);
+					};
+				})
+		});
+
+</script>
+</body>
+</html>
