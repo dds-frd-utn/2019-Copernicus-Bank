@@ -1,0 +1,242 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Copernicus Bank</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+            <!-- Page Wrapper -->
+            <div id="page-wrapper">
+
+                <!-- Wrapper -->
+		<div id="wrapper">
+                    <!-- Panel (Banner) -->
+                    <section class="panel banner right" id="panel">
+                        <div class="content color0 span-3-75">
+                            <h1 class="major">COPERNICUS</h1>
+                                <p>Copernicus Bank es un proyecto realizado creando un servicio RESTFul<br />
+                                para simular la operatoria de un banco.
+                		</p>
+                            <ul class="actions">
+                                <li><a href="#cliente" class="button primary color1 circle icon solid fa-angle-right">Next</a></li>
+                            </ul>
+			</div>
+			<div class="image filtered span-1-75" data-position="25% 25%">
+                            <img src="images/pic01.jpg" alt="" />
+                            <img class="image" src="images/logo.png" >
+			</div>
+                    </section>
+
+                    <!-- Panel cliente -->
+                    <section class="panel spotlight medium centered" id="cliente">
+                        <div class="content span-10">
+                            <h2 class="major">CLIENTE</h2>
+                            <ul>
+                            	<li>Consultar todos los clientes del banco:<br/>
+                                	<i>"http://localhost:8080/copernicus/rest/cliente"</i>
+                            	</li>
+                            	<li>Ver un cliente según su idCliente:<br/>
+                            		<i>"http://localhost:8080/copernicus/rest/cliente/{idCliente}"</i>
+                        	    </li>
+                            	<li>Filtrar los clientes segun el estado crediticio que posean:<br/>
+                            		<i>"http://localhost:8080/copernicus/rest/cliente/estado/{estadoCrediticio}"</i>
+                            	</li>
+                                <li>Hallar un cliente segun su Documento Unico:<br/>
+                                    <i>"http://localhost:8080/copernicus/rest/cliente/du/{du}"</i>
+                                </li>
+                                <li>Consultar la informacion personal de un cliente:<br/>
+                                    <i>"http://localhost:8080/copernicus/rest/cliente/{idCliente}/informacionPersonal"</i>
+                                </li>
+                            </ul>
+                            <ul class="actions">
+                                <li>
+                                    <a href="#panel" class="button primary color1 circle icon solid fa-angle-left">Next</a>
+				                </li>
+                                <li>
+                                    <a href="#ip" class="button primary color1 circle icon solid fa-angle-right">Next</a>
+				                </li>
+
+                            </ul>
+                        </div>
+            			<div class="image filtered tinted" data-position="top left">
+                            <img src="images/fondo1.jpg" alt="" />
+			            </div>
+                    </section>
+                    
+                    <!-- Panel Informacion Personal-->
+                    <section class="panel spotlight medium centered" id="ip">
+                        <div class="content span-10">
+                            <h2 class="major">INFORMACION PERSONAL</h2>
+                                <ul class="alt">
+                                    <li>Consultar la informacion personal de todos los clientes del banco:
+                                        <blockquote>"http://localhost:8080/copernicus/rest/informacionpersonal"</blockquote>
+                                    </li>
+                                    <li>Listar la informacion personal segun su idIP:
+                                        <blockquote>"http://localhost:8080/copernicus/rest/informacionpersonal/{idIP}"</blockquote>
+                                    </li>
+                                    <li>Ver la informacion personal de un cliente:
+                                        <blockquote>"http://localhost:8080/copernicus/rest/informacionpersonal/cliente/{idCliente}"</blockquote>
+                                    </li>
+                                </ul>
+                                <ul class="actions">
+                                    <li>
+                                        <a href="#cliente" class="button primary color1 circle icon solid fa-angle-left">Next</a>
+                                    </li>
+                                    <li>
+                                        <a href="#cuenta" class="button primary color1 circle icon solid fa-angle-right">Next</a>
+                                    </li>
+                                </ul>
+                        </div>
+                        <div class="image filtered tinted" data-position="top left">
+                            <img src="images/pic02.jpg" alt="" />
+                        </div>
+                    </section>
+
+                    <!-- Panel cuenta -->
+                    <section class="panel spotlight medium centered" id="cuenta">
+                        <div class="content span-10">
+                            <h2 class="major">CUENTA</h2>
+                            <ul style="list-style-type:circle">
+                            	<li>Consultar todas las cuentas del banco:<br/>
+                            		<code>"http://localhost:8080/copernicus/rest/cuenta"</code>
+                        	    </li>
+                            	<li>Ver una cuenta según su idCuenta:<br/>
+                                	<code>"http://localhost:8080/copernicus/rest/cuenta/{idCuenta}"</code>
+                            	</li>
+                            	<li>Ver una cuenta según idCliente:<br/>
+                            		<code>"http://localhost:8080/copernicus/rest/cuenta/cliente/{idCliente}"</code>
+                            	</li>
+                            	<li>Consultar el saldo de una cuenta:<br/>
+                                         <code>"http://localhost:8080/copernicus/rest/cuenta/{idCuenta}/saldo"</code>
+                            	</li>
+                                <li>Ultimos movimientos de una cuenta:<br/>
+                                         <code>"http://localhost:8080/copernicus/rest/cuenta/{idCuenta}/ultimosMovimientos"</code>
+                                </li>
+                                <li>Hallar el movimiento de una cuenta segun su estado y tipo:<br/>
+                                         <code>"http://localhost:8080/copernicus/rest/cuenta/{idCuenta}/movimientos/tipo/{tipo}/estado/{estado}"</code>
+                                </li>
+                            </ul>
+                            <ul class="actions">
+                                <li>
+                                    <a href="#ip" class="button primary color1 circle icon solid fa-angle-left">Next</a>
+				                </li>
+                                <li>
+                                    <a href="#movimiento" class="button primary color1 circle icon solid fa-angle-right">Next</a>
+				                </li>
+                            </ul>
+                        </div>
+			            <div class="image filtered tinted" data-position="top left">
+                            <img src="images/pic06.jpg" alt="" />
+	                    </div>
+                    </section>
+
+                    <!-- Panel movimiento -->
+                    <section class="panel spotlight medium centered" id="movimiento">
+                        <div class="content span-10">
+                            <h2 class="major">MOVIMIENTO</h2>
+                            <ul>
+                                <li>Consultar todos los movimientos del banco:<br/>
+                                    <i>"http://localhost:8080/copernicus/rest/movimiento"</i>
+                                </li>
+                                <li>Ver un movimientos según su id:<br/>
+                                    <i>"http://localhost:8080/copernicus/rest/movimientos/{idMovimiento}"</i>
+                                </li>
+                                <li>Consultar el saldo de un movimiento:<br/>
+                                    <i>"http://localhost:8080/copernicus/rest/movimiento/{idMovimiento}/saldo"</i>
+                                </li>
+                                <li>Hallar movimientos segun su tipo:<br/>
+                                    <i>"http://localhost:8080/copernicus/rest/movimiento/tipo/{tipo}"</i>
+                                </li>
+                                <li>Filtrar movimientos segun su estado:<br/>
+                                    <i>"http://localhost:8080/copernicus/rest/movimiento/estado/{estado}"</i>
+                                </li>
+                                <li>Hallar movimientos segun su tipo y estado:<br/>
+                                    <i>"http://localhost:8080/copernicus/rest/movimiento/tipo/{tipo}/estado/{estado}"</i>
+                                </li>
+                            </ul>
+                            <ul class="actions">
+                                <li>
+                                    <a href="#cuenta" class="button primary color1 circle icon solid fa-angle-left">Next</a>
+                                </li>
+                                <li>
+                                    <a href="#bono" class="button primary color1 circle icon solid fa-angle-right">Next</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="image filtered tinted" data-position="top left">
+                            <img src="images/fondo1.jpg" alt="" />
+                        </div>
+                    </section>
+				
+                    <!-- Panel Bono-->
+                    <section class="panel spotlight medium centered" id="bono">
+                        <div class="content span-10">
+                            <h2 class="major">BONO</h2>
+                                <ul class="alt">
+                                    <li>Consultar todas los bonos que han sido comprados en el banco:
+                                        <blockquote>"http://localhost:8080/copernicus/rest/movimiento/bonos"</blockquote>
+                                    </li>
+                                    <li>Ver todos los bonos segun su idBono que fueron comprados:
+                                        <blockquote>"http://localhost:8080/copernicus/rest/movimiento/bonos/{idBono}"</blockquote>
+                                    </li>
+                                </ul>
+                                <ul class="actions">
+                                    <li>
+                                        <a href="#movimiento" class="button primary color1 circle icon solid fa-angle-left">Next</a>
+                                    </li>
+                                    <li>
+                                        <a href="#transaccion" class="button primary color1 circle icon solid fa-angle-right">Next</a>
+                                    </li>
+                                </ul>
+                        </div>
+                        <div class="image filtered tinted" data-position="top left">
+                            <img src="images/pic01 (2).jpg" alt="" />
+                        </div>
+                    </section>
+                    
+                    <!-- Panel Transaccion-->
+                    <section class="panel spotlight medium left" id="transaccion">
+                        <div class="content span-10">
+                            <h2 class="major">TRANSFERENCIA</h2>
+                                <ul style="list-style-type:square">
+                                    <li>Consultar todas las transferencias realizadas en el banco:<br/>
+                                       <code>"http://localhost:8080/copernicus/rest/movimiento/transferencias"</code>
+                                    </li>
+                                    <li>Ver una transferencia segun su correspondiente id:<br/>
+                                        <code>"http://localhost:8080/copernicus/rest/movimiento/transferencias/{idTransferencia}"</code>
+                                    </li>
+                                    <li>Ver una transferencia segun el id del movimiento:<br/>
+                                        <code>"http://localhost:8080/copernicus/rest/movimiento/transferencias/{idMovimiento}"</code>
+                                    </li>
+                                    <li>Hallar el saldo de una transferencia:<br/>
+                                        <code>"http://localhost:8080/copernicus/rest/movimiento/transferencia/{idTransferencia}/saldo"</code>
+                                    </li>
+                                </ul>
+                                <ul class="actions">
+                                    <li>
+                                        <a href="#bono" class="button primary color1 circle icon solid fa-angle-left">Next</a>
+                                    </li>
+                                </ul>
+                        </div>
+                        <div class="image filtered tinted" data-position="top left">
+                            <img src="images/pic12.jpg" alt="" />
+                        </div>                        
+                    </section>
+						
+                    <!-- Copyright -->
+                    <div class="copyright">&copy; Copernicus Bank 2019</div>
+                </div>
+            </div>
+
+            <!-- Scripts -->
+            <script src="assets/js/jquery.min.js"></script>
+            <script src="assets/js/browser.min.js"></script>
+            <script src="assets/js/breakpoints.min.js"></script>
+            <script src="assets/js/main.js"></script>
+	</body>
+</html>

@@ -1,0 +1,301 @@
+<!DOCTYPE>
+<html>
+<head>
+	<title>Copernicus Bank</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+<!--===============================================================================================-->
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('images/img-01.jpg');">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form" novalidate>
+					<div class="login100-form-avatar">
+						<img src="images/logotipo.png" alt="AVATAR">
+					</div>
+
+						<span class="login100-form-title p-t-20 p-b-45">
+							C O P E R N I C U S
+						</span>
+				
+						<div id="login1" class="wrap-input100 validate-input m-b-10">
+							
+							<div class="wrap-input100 validate-input m-b-10">
+								<input class="input100" type="text" id="nomb" placeholder="Nombres">
+								<span class="focus-input100"></span>
+								<span class="symbol-input100">
+									<i class="fa fa-user"></i>
+								</span>
+							</div>
+
+							<div class="wrap-input100 validate-input m-b-10">
+								<input class="input100" type="text" id="apel" placeholder="Apellidos">
+								<span class="focus-input100"></span>
+								<span class="symbol-input100">
+									<i class="fa fa-user"></i>
+								</span>
+							</div>
+							
+							<div class="wrap-input100 validate-input m-b-10">
+								<input class="input100" type="numeric" id="idCliente" placeholder="Documento Unico">
+								<span class="focus-input100"></span>
+								<span class="symbol-input100">
+									<i class="fa fa-user"></i>
+								</span>
+							</div>
+							
+							<div class="wrap-input100 validate-input m-b-10">
+								<input class="input100" type="date" id="fn" placeholder="Fecha de Nacimiento">
+								<span class="focus-input100"></span>
+								<span class="symbol-input100">
+									<i class="fa fa-user"></i>
+								</span>
+							</div>
+
+							<div class="container-login100-form-btn p-t-10">
+								<button id="siguiente" class="login100-form-btn">
+									S I G U I E N T E
+								</button>
+							</div>
+							
+							<div class="text-center w-full p-t-30">
+								<button id="volver">V O L V E R</button>
+							</div>
+						</div>
+
+						<div id="login2" style="display: none" class="wrap-input100 validate-input m-b-10">
+							<div class="wrap-input100 validate-input m-b-10">
+								<input class="input100" type="text" id="domicilio" placeholder="Domicilio" required>
+								<span class="focus-input100"></span>
+								<span class="symbol-input100">
+									<i class="fa fa-user"></i>
+								</span>
+							</div>
+
+							<div class="wrap-input100 validate-input m-b-10">
+								<input class="input100" type="numeric" id="telefono" placeholder="Telefono">
+								<span class="focus-input100"></span>
+								<span class="symbol-input100">
+									<i class="fa fa-user"></i>
+								</span>
+							</div>
+
+							<div class="wrap-input100 validate-input m-b-10">
+								<input class="input100" type="text" id="email" placeholder="E-mail">
+								<span class="focus-input100"></span>
+								<span class="symbol-input100">
+									<i class="fa fa-user"></i>
+								</span>
+							</div>
+
+							<div class="wrap-input100 validate-input m-b-10">
+								<input class="input100" type="numeric" id="cuil" placeholder="Cuil/Cuit">
+								<span class="focus-input100"></span>
+								<span class="symbol-input100">
+									<i class="fa fa-user"></i>
+								</span>
+							</div>
+
+							<div class="wrap-input100 validate-input m-b-10">
+								<input class="input100" type="text" id="sexo" placeholder="Sexo">
+								<span class="focus-input100"></span>
+								<span class="symbol-input100">
+									<i class="fa fa-user"></i>
+								</span>
+							</div>
+
+							<div class="container-login100-form-btn p-t-10">
+								<button id="siguiente2" class="login100-form-btn">
+									S I G U I E N T E
+								</button>
+							</div>
+							<div class="text-center w-full p-t-30">
+								<button id="volver2">V O L V E R</button>
+							</div>
+					  	</div>
+
+						<div id="login3" style="display: none" class="wrap-input100">	
+							
+							<div class="wrap-input100 validate-input m-b-10">
+								<input class="input100" type="text" id="pss" placeholder="Contraseña">
+								<span class="focus-input100"></span>
+								<span class="symbol-input100">
+									<i class="fa fa-user"></i>
+								</span>
+							</div>
+
+							<div class="wrap-input100 validate-input m-b-10">
+								<input class="input100" type="numeric" id="saldo" placeholder="Saldo Inicial">
+								<span class="focus-input100"></span>
+								<span class="symbol-input100">
+									<i class="fa fa-user"></i>
+								</span>
+							</div>
+							<div class="container-login100-form-btn p-t-10">
+								<button id="guardar" class="login100-form-btn">
+									G U A R D A R
+								</button>
+							</div>
+							<div class="text-center w-full p-t-30">
+								<button id="volver3">V O L V E R</button>
+							</div>
+						</div>
+				
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/select2/select2.min.js"></script>
+	<script src="js/main.js"></script>
+	<script src="funciones.js"></script>
+
+</body>
+
+<script type="text/javascript">
+
+today = fechaActual();
+
+$('#guardar').on('click', function(){
+	var cuenta = $('#idCliente').val().toString();
+    var data = JSON.stringify({    
+    	idCuenta : $('#idCliente').val(),
+        saldo : $('#saldo').val(),
+        idCliente : $('#idCliente').val(),
+        password : $('#pss').val(),
+        fechaApertura : today+'T00:00:00Z[UTC]'
+    });
+    var xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+    xhr.addEventListener("readystatechange", function () {
+    	if (this.readyState === this.DONE) {
+    		console.log(this.responseText);
+    	}
+    });
+    xhr.open("POST", "http://localhost:8080/copernicus/rest/cuenta");
+    xhr.setRequestHeader("content-type", "application/json");
+    xhr.send(data);
+    console.log(data);
+    
+    var dataBC = JSON.stringify({
+  		idBanco: "18",
+  		idCiudadano: $('#idCliente').val(),
+  		saldo: $('#saldo').val()
+    })    
+    //crea cuenta en el banco central
+ 	cliente = request("http://lsi.no-ip.org:8282/esferopolis/api/cuenta/","POST",dataBC,function(response){console.log(response)});
+ 	alert("Su cuenta fue creada exitosamente, podra ingresar con su numero de documento unico y la password elegida")
+ 	window.location.href='http://localhost:8080/copernicus/login/loginp.html';                         
+	return false;  
+});
+$('#siguiente').on('click', function(){
+	$("#login2").show();
+	$("#login1").hide();
+	var du = $('#idCliente').val();
+    var urlClientes = "http://localhost:8080/copernicus/rest/cliente/du/"+du;
+    cliente = request(urlClientes,"GET","",function(response){
+    	if(response.length==0){
+    		clienteBC = request("http://lsi.no-ip.org:8282/esferopolis/api/ciudadano/"+du,"GET","",function(myJson){
+    			if (!myJson || myJson.estadoCrediticio == 5) {
+                alert("No es posible crear su cuenta, o bien su estado crediticio es inhabilitado o usted no existe! OMG");
+                window.location.href='http://localhost:8080/copernicus/login/loginp.html';                         
+				return false;  
+    			} else {
+    			crearClienteCopernicus();
+    			}
+    		});
+    	} else {
+    		alert("Cliente ya existente")
+    		window.location.href='http://localhost:8080/copernicus/login/loginp.html';                         
+			return false;  
+		}
+	});
+});
+    
+
+function crearClienteCopernicus(){    
+		var edad = calcularEdad($('#fn').val());
+		var data = JSON.stringify({    
+	     	nombre : $('#nomb').val(),
+	        apellido : $('#apel').val(),
+	        documentoUnico : $('#idCliente').val(),
+	    	fechaNacimiento : $('#fn').val()+'T00:00:00Z[UTC]'
+	    });
+	    
+	    if (edad >= 16){
+		    var xhr = new XMLHttpRequest();
+		    xhr.withCredentials = true;
+		    xhr.addEventListener("readystatechange", function () {
+		    if (this.readyState === this.DONE) {
+		        console.log(this.responseText);
+		    	}
+		    });
+
+		    xhr.open("POST", "http://localhost:8080/copernicus/rest/cliente");
+		    xhr.setRequestHeader("content-type", "application/json");
+		    xhr.send(data);
+		} else {
+			alert("Para crear una cuenta debe tener mas de 16 a;os");
+			window.location.href='http://localhost:8080/copernicus/login/loginp.html';                         
+			return false;  
+		}
+};
+
+$('#siguiente2').bind('click', function(){
+	$("#login3").show();
+	$("#login2").hide();
+    var data = JSON.stringify({
+     	idCliente : $('#idCliente').val(),
+     	cuil : $('#cuil').val(),
+        domicilio : $('#domicilio').val(),
+        telefono : $('#telefono').val(),
+        email : $('#email').val(),
+        sexo : $('#sexo').val(),
+        actualizado : today+'T00:00:00Z[UTC]'
+    });
+    console.log(data)
+    var xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+    xhr.addEventListener("readystatechange", function () {
+	    if (this.readyState === this.DONE) {
+	    	console.log(this.responseText);
+	    }
+    });
+    xhr.open("POST", "http://localhost:8080/copernicus/rest/informacionPersonal");
+    xhr.setRequestHeader("content-type", "application/json");
+    xhr.send(data);
+});
+
+$('#volver').bind('click', function(){
+	window.location.href='http://localhost:8080/copernicus/login/loginp.html';                         
+	return false;
+});
+
+$('#volver2').bind('click', function(){
+	$("#login1").show();
+	$("#login2").hide();
+});
+
+$('#volver3').bind('click', function(){
+	$("#login2").show();
+	$("#login3").hide();
+});
+
+</script>
+</html>

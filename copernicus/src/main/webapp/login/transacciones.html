@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Copernicus Bank</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('images/img-01.jpg');">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form">
+					<div class="login100-form-avatar">
+						<img src="images/logotipo.png" alt="AVATAR">
+							</div>
+
+								<span class="login100-form-title p-t-20 p-b-45">
+									C O P E R N I C U S
+								</span>
+
+								<div id="botones" class="container-login100-form-btn p-t-10">
+									<div class="container-login100-form-btn p-t-10">
+										<button id="ver" class="login100-form-btn">
+											MIS TRANSFERENCIAS
+										</button>
+									</div>
+
+									<h1 id="saldos" class="container-login100-form-btn p-t-10" style="display: none"></h1>
+									<table id="keywords" cellspacing="0" cellpadding="0" style="display: none">
+									    <thead>
+									      <tr>
+									        <th><span>Transferencia</span></th>
+									        <th><span>Movimiento Nro</span></th>
+									        <th><span>Destino</span></th>
+									        <th><span>Fecha Inicio</span></th>
+									        <th><span>Fecha Fin</span></th>
+									        <th><span>Importe</span></th>
+									      </tr>
+									    </thead>
+									    <tbody>
+									    </tbody>
+									  </table>
+
+									<div class="container-login100-form-btn p-t-10">
+										<button id="hacer" class="login100-form-btn">
+											REALIZAR TRANSFERENCIA
+										</button>
+									</div>
+								</div>
+
+								<div id="campos" style="display: none" class="container-login100-form-btn p-t-10">
+										<div class="wrap-input100 validate-input m-b-10">
+											<input class="input100" type="numeric" id="destino" placeholder="Numero de cuenta DESTINO" required>
+											<span class="focus-input100"></span>
+											<span class="symbol-input100">
+												<i class="fa fa-user"></i>
+											</span>
+										</div>
+
+										<div class="wrap-input100 validate-input m-b-10">
+											<input class="input100" type="numeric" id="importe" placeholder="Importe">
+											<span class="focus-input100"></span>
+											<span class="symbol-input100">
+												<i class="fa fa-user"></i>
+											</span>
+										</div>
+
+										<div class="wrap-input100 validate-input m-b-10">
+											<input class="input100" type="checkbox" id="banco">Cuenta destino pertenece a Copernicus Bank<br>
+											<span class="focus-input100"></span>
+											<span class="symbol-input100">
+												<i class="fa fa-user"></i>
+											</span>
+										</div>
+										<div class="container-login100-form-btn p-t-10">
+											<button id="enviar" class="login100-form-btn" onclick="fechaActual()">
+												E N V I A R
+											</button>
+										</div>
+								</div>
+
+								<div class="text-center w-full p-t-30">
+									<a href="javascript:window.history.back();">&laquo; Volver atrás</a>
+								</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+	<script src="funciones.js"></script>
+	<script type="text/javascript">
+
+
+	$.fn.llenarTabla = function(myJson, i,textTransf) {
+		$("tbody").append(
+			$("<tr/>"),
+			$("<td/>", {text: textTransf}),
+			$("<td/>", {text: myJson[i].idTransaccion}),
+			$("<td/>", {text: myJson[i].idDestino}),
+			$("<td/>", {text: myJson[i].idMovimiento}),
+			$("<td/>", {text: myJson[i].fechaInicio}),
+			$("<td/>", {text: myJson[i].fechaFin}),
+			$("<td/>", {text: myJson[i].importe}),
+		);
+	}
+
+		//Ver mis transacciones
+	$("#ver").click(function(event){
+		var id = id_url();
+		event.preventDefault();
+		$("#botones").hide();
+		$("#saldos").show();
+		url = "http://localhost:8080/copernicus/rest/movimientos/cuenta/" + id;
+		request(url,"GET","",
+			function(myJson){
+				console.log(myJson);
+				$("table").show();
+				let textTransf = "";
+				for(var i in myJson) {
+					textTransf = $.fn.bonoid(myJson, i);
+					$.fn.llenarTabla(myJson, i, textTransf);
+				}
+			}
+		);
+				
+	});
+
+
+	$("#hacer").on('click', function(event){
+		event.preventDefault();
+	    $("#campos").show();
+	    $("#div_salir").hide();
+	    $("#botones").hide();
+		$("#div_volver").show();
+	});
+
+	$('#enviar').on('click', function(){
+		var id = id_url();
+		var today = fechaActual();
+		var dataMovimiento = JSON.stringify({
+			tipo: 1,
+			estado: 3,
+			fechaMovimiento: today+'T00:00:00Z[UTC]',
+			idCuenta: id,
+			importe: 1.1*($('#importe').val())
+		});	
+
+		request("http://localhost:8080/copernicus/rest/movimientos","POST",dataMovimiento,
+			function(response){
+				crearTransferencia(response);
+			});
+		}
+	);
+				
+	function crearTransferencia(response){
+		var movimiento = response.idMovimiento;
+		var id = id_url();
+		var today = fechaActual();
+		var dataTransferencia = JSON.stringify({
+								idMovimiento: movimiento,
+								idDestino: $('#destino').val(),
+								fechaInicio: today+'T00:00:00Z[UTC]',
+								fechaFin: today+'T00:00:00Z[UTC]',
+								importe: $('#importe').val(),
+								impuesto: 1.1
+			});
+
+		request("http://localhost:8080/copernicus/rest/movimiento/transferencias","POST",dataTransferencia,
+				function(response){
+					console.log(response)
+					actualizarSaldo(response);
+		});
+		window.location.href='http://localhost:8080/copernicus/login/transacciones.html?id='+id;
+		return false;
+	};
+
+	function actualizarSaldo(response){
+		var id = id_url();
+		var importe = (response.importe)*(response.impuesto);
+		request("http://localhost:8080/copernicus/rest/cuenta/"+id,"GET","",
+				function(json){
+					saldo(json,importe);
+		});
+	};
+
+	function saldo(response,importe){
+		var cuenta = response.idCuenta;
+		var dataCuenta = JSON.stringify({
+						idCliente: response.idCliente,
+						password: response.password,
+						saldo: (response.saldo)-importe,
+						fechaApertura: response.fechaApertura,
+						idCuenta: cuenta,
+		});					
+		request("http://localhost:8080/copernicus/rest/cuenta/"+cuenta,"PUT",dataCuenta,
+				function(myJson){
+					console.log(myJson)
+		});
+	};
+
+	</script>
+</body>
+</html>

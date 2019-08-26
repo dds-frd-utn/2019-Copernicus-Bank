@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Copernicus Bank</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('images/img-01.jpg');">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form">
+					
+					<div class="login100-form-avatar">
+						<img src="images/logotipo.png" alt="AVATAR">
+					</div>
+					
+					<span class="login100-form-title p-t-20 p-b-45">
+						C O P E R N I C U S
+					</span>
+
+					<div id="botones" class="container-login100-form-btn p-t-10">
+
+						<div class="container-login100-form-btn p-t-10">
+							<button class="login100-form-btn" id="saldo">
+							S A L D O
+							</button>
+						</div>
+						
+						<div class="container-login100-form-btn p-t-10">
+							<button class="login100-form-btn" id="movimientos">
+								M O V I M I E N T O S
+							</button>
+						</div>						
+					</div>
+						<h1 id="saldos" class="container-login100-form-btn p-t-10" style="display: none"></h1>
+						<div id="div_salir" class="container-login100-form-btn p-t-10">
+							<button class="login100-form-btn" id="salir">
+								S A L I R
+							</button>
+					</div>
+					<div id="div_volver" class="container-login100-form-btn p-t-10" style="display: none">
+						<button id="volver" class="login100-form-btn">
+							V O L V E R
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="vendor/select2/select2.min.js"></script>
+	<script src="js/main.js"></script>
+	<script src="funciones.js"></script>
+	<script> 
+
+var id = id_url();
+var idBono;
+
+$('#volver').bind('click', function(){
+    window.location.href='http://localhost:8080/copernicus/login/ingresar.html?id='+id;                         
+	return false;
+});
+
+$('#movimientos').on('click', function(){	
+	window.location.href='http://localhost:8080/copernicus/login/movimientos.html?id='+id;                         
+	return false;
+});
+
+$('#salir').on('click', function(){	
+	window.location.href='http://localhost:8080/copernicus/login/loginp.html';                         
+	return false;
+});
+
+$("#saldo").click(function(event){
+    event.preventDefault(); //por defecto el boton de un formulario te manda a la url del action, esto lo evita
+    $("#botones").hide();
+    $("#div_salir").hide();
+    $("#div_volver").show();
+    $("#saldos").show();
+   	$.ajax({
+    	url:"http://localhost:8080/copernicus/rest/cuenta/"+id+"/saldo",
+        type:"get",
+        dataType:"json",
+        success:function(myJson){
+        	console.log(myJson);
+            $("#saldos").html("Su saldo actual es de: $" + myJson );
+        },
+        error:function(error){
+        	console.log(error);
+        }
+    });
+});
+
+
+</script>
+</body>
+</html>
